@@ -7,7 +7,7 @@
 
   <toolshelf name="qLib" label="qLib">
     <memberTool name="AccessShotNode_qL"/>
-    <memberTool name="ToggleViewportBackgroundColor_qL"/>
+    <memberTool name="ToggleViewportBackgroundColor_qL"/>direction
     <memberTool name="ToggleIntegerFrames_qL"/>
     <memberTool name="ReferenceCopy_qL"/>
     <memberTool name="AttribDisplayMarkers_qL"/>
@@ -438,16 +438,14 @@ _version 1_ ---
 2018-07-22:
     - Added shift-click option
     - Improved help page]]></helpText>
-    <script scriptType="python"><![CDATA[import hou
-
-shift = kwargs['shiftclick']
-
-m = not hou.playbar.usesIntegerFrames()
-if shift:
-    m = True
-hou.playbar.setUseIntegerFrames(m)
-
-hou.ui.setStatusMessage(" ---- Using Integer Frames: %s" % ("ON" if m else "OFF"))
+    <script scriptType="python"><![CDATA[
+if hou.playbar.usesIntegerFrames() == True:
+    hou.playbar.setUseIntegerFrames(False)
+    hou.playbar.setFrameIncrement(0.1)
+    hou.ui.setStatusMessage(" ---- Using Integer Frames: OFF" )
+else:
+    hou.playbar.setUseIntegerFrames(True)
+    hou.ui.setStatusMessage(" ---- Using Integer Frames: ON" )
 ]]></script>
   </tool>
 
